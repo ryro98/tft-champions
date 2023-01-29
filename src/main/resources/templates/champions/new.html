@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="/style.css">
+    <style type="text/css">
+    body {
+        background-color: rgb(185, 185, 185);
+    }
+
+    table {
+        background-color: black;
+        text-align: center;
+        font-weight: bold;
+
+    }
+
+    table tr:nth-child(odd) td {
+        background-color: gray;
+    }
+
+        table tr:nth-child(even) td {
+        background-color: lightgray;
+    }
+
+    td {
+        padding: 5px;
+    }
+
+    a {
+        color: black;
+        text-decoration: none;
+    }
+
+    </style>
+    <script src="script.js"></script>
+    <meta charset = "UTF-8"/>
+    <title>TFT Interface</title>
+</head>
+
+<body>
+<a th:href="@{'/champions'}"><h1 style="text-align: center;">Champions List</h1></a>
+<br>
+<h2 style="text-align: center;">Add champion</h2>
+
+<form th:action="@{'/new'}" th:object="${champion}" method="post" enctype="multipart/form-data">
+    <input type="hidden" th:field="*{id}" />
+    <table style="  margin-left: auto;
+  margin-right: auto;">
+        <tr>
+            <td>Name</td>
+            <td><input type="text" th:field="*{name}" class="form-control" required minlength="3" maxlength="20" /></td>
+        </tr>
+        <tr>
+            <td>Cost</td>
+            <td><input type="number" th:field="*{cost}" class="form-control" required maxlength="1" /></td>
+        </tr>
+        <tr>
+            <td>Origin</td>
+            <td><input type="text" th:field="*{origin}" class="form-control" required minlength="3" maxlength="20" /></td>
+        </tr>
+        <tr>
+            <td>Origin2</td>
+            <td><input type="text" th:field="*{origin2}" class="form-control" minlength="3" maxlength="20" /></td>
+        </tr>
+        <tr>
+            <td>Class</td>
+            <td><input type="text" th:field="*{className}" class="form-control" required minlength="3" maxlength="20" /></td>
+        </tr>
+        <tr>
+            <td>Class2</td>
+            <td><input type="text" th:field="*{className2}" class="form-control" minlength="3" maxlength="20" /></td>
+        </tr>
+        <tr>
+            <td>Health</td>
+            <td><input type="number" th:field="*{health}" class="form-control" required maxlength="4" /></td>
+        </tr>
+        <tr>
+            <td>Attack Damage</td>
+            <td><input type="number" th:field="*{ad}" class="form-control" required maxlength="3" /></td>
+        </tr>
+        <tr>
+            <td>Attack Range</td>
+            <td><input type="number" th:field="*{atkRange}" class="form-control" required maxlength="1" /></td>
+        </tr>
+        <tr>
+            <td>Attack Speed</td>
+            <td><input type="number" th:field="*{atkSpeed}" class="form-control" required maxlength="3" /></td>
+        </tr>
+        <tr>
+            <td>Armor</td>
+            <td><input type="number" th:field="*{armor}" class="form-control" required maxlength="3" /></td>
+        </tr>
+        <tr>
+            <td>Skill name</td>
+            <td><input type="text" th:field="*{skillName}" class="form-control" required minlength="3" maxlength="30" /></td>
+        </tr>
+        <tr>
+            <td>Skill text</td>
+            <td><input type="text" th:field="*{skillText}" class="form-control" required minlength="10" maxlength="500" /></td>
+        </tr>
+        <tr>
+            <td>Base mana</td>
+            <td><input type="number" th:field="*{baseMana}" class="form-control" required maxlength="3" /></td>
+        </tr>
+        <tr>
+            <td>Max mana</td>
+            <td><input type="number" th:field="*{maxMana}" class="form-control" required maxlength="3" /></td>
+        </tr>
+        <tr>
+            <td>Champion Image</td>
+            <td><input type="file" name="file" class="form-control" required accept="image/png"/></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Add"></td>
+        </tr>
+    </table>
+</form>
+</body>
+
+</html>

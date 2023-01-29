@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:href="http://www.w3.org/1999/xhtml"
+      xmlns:td="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="/style.css">
+    <style type="text/css">
+    body {
+        background-color: rgb(185, 185, 185);
+    }
+
+    table {
+        background-color: black;
+        text-align: center;
+        font-weight: bold;
+        font-size: 25px;
+    }
+
+    table tr:nth-child(odd) td {
+        background-color: gray;
+    }
+
+        table tr:nth-child(even) td {
+        background-color: lightgray;
+    }
+
+    a {
+        color: black;
+        text-decoration: none;
+    }
+
+    #image {
+        position: absolute;
+        top: 3%;
+        left: 6%;
+    }
+
+    #table {
+        position: absolute;
+        top: 19%;
+    }
+    #skill {
+        position: absolute;
+        top: 17%;
+        left: 25%;
+        width: 50%;
+    }
+
+    </style>
+    <meta charset="UTF-8"/>
+    <title>TFT Interface</title>
+</head>
+
+<body>
+<a th:href="@{'/champions'}"><h1 style="text-align: center;">Champions List</h1></a>
+<div id="image">
+    <img th:src="@{${'/images/champs/'+ champion.name + '.png'}}">
+</div>
+<div id="table" style="float: left;">
+<table border="1" cellpadding="5">
+    <tr>
+        <td><b>Name</b></td>
+        <td th:text="${champion.name}">Name</td>
+    </tr>
+    <tr>
+        <td><b>Cost</b></td>
+        <td th:text="${champion.cost}">Cost</td>
+    </tr>
+    <tr>
+        <td><b>Origin</b></td>
+        <td th:text="${champion.origin}">Origin</td>
+    </tr>
+    <tr>
+        <td><b>Origin2</b></td>
+        <td th:text="${champion.origin2}">Origin2</td>
+    </tr>
+    <tr>
+        <td><b>Class</b></td>
+        <td th:text="${champion.className}">Class</td>
+    </tr>
+    <tr>
+        <td><b>Class2</b></td>
+        <td th:text="${champion.className2}">Class2</td>
+    </tr>
+    <tr>
+        <td><b>Health</b></td>
+        <td th:text="${champion.health}">Health</td>
+    </tr>
+    <tr>
+        <td><b>AD</b></td>
+        <td th:text="${champion.ad}">AD</td>
+    </tr>
+    <tr>
+        <td><b>Attack Range</b></td>
+        <td th:text="${champion.atkRange}">Attack Range</td>
+    </tr>
+    <tr>
+        <td><b>Attack Speed</b></td>
+        <td th:text="${champion.atkSpeed}">Attack Speed</td>
+    </tr>
+    <tr>
+        <td><b>Armor</b></td>
+        <td th:text="${champion.armor}">Armor</td>
+    </tr>
+    <tr>
+        <td><b>Base mana</b></td>
+        <td th:text="${champion.baseMana}">Base mana</td>
+    </tr>
+    <tr>
+        <td><b>Max mana</b></td>
+        <td th:text="${champion.maxMana}">Max mana</td>
+    </tr>
+</table>
+</div>
+<div id="skill" style="float: left;">
+    <h3 th:text="${champion.skillName}">Skill Name</h3>
+    <p th:text="${champion.skillText}">Skill Text</p>
+</div>
+<div style="clear: both;"></div>
+</body>
+</html>

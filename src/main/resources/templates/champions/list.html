@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:href="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="/style.css">
+    <style type="text/css">
+    body {
+        background-color: rgb(185, 185, 185);
+    }
+
+    table {
+        background-color: black;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    td {
+        width: 100px;
+    }
+
+    table tr:nth-child(odd) td {
+        background-color: gray;
+    }
+
+        table tr:nth-child(even) td {
+        background-color: lightgray;
+    }
+
+    a {
+        color: black;
+        text-decoration: none;
+    }
+
+    </style>
+    <script src="script.js"></script>
+    <meta charset="UTF-8"/>
+    <title>TFT Interface</title>
+</head>
+
+<body>
+<a th:href="@{'/champions'}"><h1 style="text-align: center;">Champions List</h1></a>
+<a th:href="@{'/new'}"><h2>Create champion</h2></a>
+<div id="table" style="float: left;">
+<table border="1" cellpadding="5">
+    <tr style="        background-color: lightgray;">
+        <th>Name</th>
+        <th>Image</th>
+        <th>Cost</th>
+        <th>Origin</th>
+        <th>Origin2</th>
+        <th>Class</th>
+        <th>Class2</th>
+
+    </tr>
+    <tr th:each="champion : ${champions}">
+        <td><a th:href="@{'/champions/' + ${champion.id}}"><h4 th:text="${champion.name}">Name</h4></a></td>
+        <td><img th:src="@{${'/images/champs/'+ champion.name + '.png'}}"></td>
+        <td th:text="${champion.cost}">Cost</td>
+        <td th:text="${champion.origin}">Origin</td>
+        <td th:text="${champion.origin2}">Origin2</td>
+        <td th:text="${champion.className}">Class</td>
+        <td th:text="${champion.className2}">Class2</td>
+    </tr>
+</table>
+</div>
+<div id="divSearch" style="float: left; padding-left: 10px;">
+    <fieldset>
+        <legend>Search by:</legend>
+        <form th:action="@{'/search'}" method="get">
+            <div>
+                <input type="checkbox" id="nameBox" onclick="nameChecked()">
+                <label for="nameBox">Name</label>
+                <input type="text" id="name" name="name" disabled>
+            </div>
+            <div>
+                <input type="checkbox" id="costBox" onclick="costChecked()">
+                <label for="costBox">Cost</label>
+                <input type="number" id="cost" name="cost" disabled>
+            </div>
+            <div>
+                <input type="checkbox" id="originBox" onclick="originChecked()">
+                <label for="originBox">Origin</label>
+                <input type="text" id="origin" name="origin" disabled>
+            </div>
+            <div>
+                <input type="checkbox" id="origin2Box" onclick="origin2Checked()">
+                <label for="origin2Box">Origin2</label>
+                <input type="text" id="origin2" name="origin2" disabled>
+            </div>
+            <div>
+                <input type="checkbox" id="classnameBox" onclick="classnameChecked()">
+                <label for="classnameBox">Class</label>
+                <input type="text" id="classname" name="classname" disabled>
+            </div>
+            <div>
+                <input type="checkbox" id="classname2Box" onclick="classname2Checked()">
+                <label for="classname2Box">Class2</label>
+                <input type="text" id="classname2" name="classname2" disabled>
+            </div>
+            <input type="submit" id="search" value="Search" disabled>
+        </form>
+    </fieldset>
+</div>
+<div style="clear: both;"></div>
+</body>
+<script>
+    function nameChecked() {
+        document.getElementById("name").disabled = !document.getElementById("name").disabled;
+        nameOnly();
+        submitCheck();
+    }
+    function costChecked() {
+        if (!document.getElementById("nameBox").checked) document.getElementById("cost").disabled = !document.getElementById("cost").disabled;
+        submitCheck();
+    }
+    function originChecked() {
+        if (!document.getElementById("nameBox").checked) document.getElementById("origin").disabled = !document.getElementById("origin").disabled;
+        submitCheck();
+    }
+    function origin2Checked() {
+        if (!document.getElementById("nameBox").checked) document.getElementById("origin2").disabled = !document.getElementById("origin2").disabled;
+        submitCheck();
+    }
+    function classnameChecked() {
+        if (!document.getElementById("nameBox").checked) document.getElementById("classname").disabled = !document.getElementById("classname").disabled;
+        submitCheck();
+    }
+    function classname2Checked() {
+        if (!document.getElementById("nameBox").checked) document.getElementById("classname2").disabled = !document.getElementById("classname2").disabled;
+        submitCheck();
+    }
+    function nameOnly(){
+        if (!document.getElementById("name").disabled) {
+            document.getElementById("cost").disabled = true;
+            document.getElementById("origin").disabled = true;
+            document.getElementById("origin2").disabled = true;
+            document.getElementById("classname").disabled = true;
+            document.getElementById("classname2").disabled = true;
+        } else {
+            document.getElementById("cost").disabled = !document.getElementById("costBox").checked;
+            document.getElementById("origin").disabled = !document.getElementById("originBox").checked;
+            document.getElementById("origin2").disabled = !document.getElementById("origin2Box").checked;
+            document.getElementById("classname").disabled = !document.getElementById("classnameBox").checked;
+            document.getElementById("classname2").disabled = !document.getElementById("classname2Box").checked;
+        }
+    }
+    function submitCheck() {
+        if (!document.getElementById("nameBox").checked && !document.getElementById("costBox").checked && !document.getElementById("originBox").checked && !document.getElementById("origin2Box").checked && !document.getElementById("classnameBox").checked && !document.getElementById("classname2Box").checked ) document.getElementById("search").disabled = true;
+        else document.getElementById("search").disabled = false;
+    }
+    $(document).ready(function() {
+    $('#example').DataTable( {
+        responsive: true,
+        "pageLength": 10
+    } );
+} );
+
+</script>
+
+</html>
